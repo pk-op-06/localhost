@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline';"
+    />
+    <link href="../css/styles.css" rel="stylesheet">
+    <script src="../assets/js/fontawesome.js" crossorigin="anonymous"></script>
+    <title>localhost</title>
+  </head>
+
+  <body>
+    <div class="fixed-bar">
+      <div id="top-bar">
+        <div class="left">
+          <div id="tabs"></div>
+          <div class="addTab" onclick="createTab()">+</div>
+        </div>
+        <div class="right">
+          <button class="menubar-btn" id="minimize-btn"><i class="fas fa-window-minimize"></i></button>
+          <button class="menubar-btn" id="max-unmax-btn"><i class="far fa-square"></i></button>
+          <button class="menubar-btn" id="close-btn"><i class="fas fa-times"></i></button>
+        </div>
+      </div>
+      <div class="navigation-bar">
+        <div class="navigation">
+          <button id="go-back" onclick="goBack()"><i class="fa fa-chevron-left"></i></button>
+          <button id="go-forward" onclick="goForward()"><i class="fa fa-chevron-right"></i></button>
+          <button onclick="reload()"><i id="reload" class="fa fa-repeat"></i></i></button>
+        </div>
+        <div class="url-container">
+          <input placeholder="Let's start bro!!" onkeyup="submit(event)" id="localhost-url-input" />
+        </div>
+        <div class="right" role="menu">
+          <button class="menubar-btn" id="menu-btn"><i class="fas fa-bars"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <webview id="devtools" src="about:blank"></webview>
+    </div>
+
+    <div class="webview-popup-menu">
+      <ul>
+        <li id="toggle-inspect" class="webview-popup-menu-item">
+          <span>Inspect</span>
+          <span>Ctrl + I</span>
+        </li>
+      </ul>
+    </div>
+
+    <script src="../scripts/renderer.js"></script>
+    <script src="../scripts/script.js"></script>
+  </body>
+</html>
