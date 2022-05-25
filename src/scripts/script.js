@@ -5,6 +5,7 @@ const internal = window.electron.getInternal();
 const DEFAULT_SEARCH_ENGINE = internal['default_search_engine'];
 const history = [];
 let selectedURL = '';
+let hasUpdated = false;
 
 createTab();
 
@@ -113,10 +114,24 @@ function createWebview(id, url) {
 
     webview.addEventListener('did-start-loading', function (e) {
       // console.log('start loading...', this.getTitle(), this.getURL(), selectedURL);
+
       document.getElementById("reload").classList.remove("fa-repeat");
       document.getElementById("reload").classList.add("fa-times");
+      
+      // if anyone clicks on a link...
       if (selectedURL) {
+
+        // console.log('Updating history on load');
+        hasUpdated = true;
+        history[window.selectedTab].back.unshift({
+          title: this.getTitle(),
+          url: inputValues[window.selectedTab],
+        });
         document.getElementById('localhost-url-input').value = selectedURL;
+        inputValues[window.selectedTab] = selectedURL;
+        selectedURL = '';
+      } else {
+        hasUpdated = false;
       }
     });
 
@@ -145,12 +160,16 @@ function createWebview(id, url) {
 
     // capture previous url from where the current internal page comes
     webview.addEventListener('will-navigate', function (e) {
-      // console.log('will-navigate:', this.getTitle(), this.getURL());
+      // console.log('will-navigate:', this.getTitle(), this.getURL(), hasUpdated);
+      if (!hasUpdated) {
+        // console.log('Updating history on will - navigate');
+        history[window.selectedTab].back.unshift({
+          title: this.getTitle(),
+          url: this.getURL(),
+        })
 
-      history[window.selectedTab].back.unshift({
-        title: this.getTitle(),
-        url: this.getURL(),
-      })
+        hasUpdated = true;
+      }
     })
 
     // capture the url on which cursor is on.
@@ -325,7 +344,7 @@ async function reload() {
 function openDevTools(x, y) {
   /*
     Below lines should open the dev tools inside the current container i.e. side-by-side of the current webview
-    but, rn electron is passing a VICHITRA Error which they don't have proper explaination for that.
+    but, rn electron is passing a VICHITRA Error which they don't have proper explaination till now.
 
     const targetId = document.getElementById("webview_"+ window.selectedTab).getWebContentsId();
     const devToolsId = document.getElementById("devtools").getWebContentsId();
@@ -375,7 +394,6 @@ async function goURL(skipHistory = false, isRoot = false, sendURL = false) {
     title: webview.getTitle(),
   }
 
-  fromView = false;
   if (!url) {
     webview.setAttribute("src", '../pages/welcome.html');
   } else {
