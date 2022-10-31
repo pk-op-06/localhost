@@ -4,7 +4,7 @@ A fast localhost browser that can be used as an alternate browser for your local
 ## Why?
 While running angular on my local on vscode + (chrome or firefox), it just hangs my pc like hell.<br>
 Looked for many alternatives or optimizations like Great Suspender, etc. But the results were not so good enough. My PC was still hanging frequently.<br>
-So, while discussing this issue, one of my senior just gave a solution for this problem saying -> <br>
+So, while discussing this issue, one of my senior just gave an idea for this problem saying -> <br>
 <strong>"So develop your own browser na..."</strong>,<br>
 as Chrome and Firefox were consuming a lot of memory(RAM) as we used to open many tabs and as a result for this, it just consumes a lot.
 
