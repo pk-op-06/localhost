@@ -8,7 +8,7 @@ So, while discussing this issue, one of my senior just gave a solution for this 
 <strong>"So develop your own browser na..."</strong>,<br>
 as Chrome and Firefox were consuming a lot of memory(RAM) as we used to open many tabs and as a result for this, it just consumes a lot.
 
-This browser will definetely consumes way much less than what others are.
+This browser will definetely consumes less than what others are.
 I have developed it using [electron](https://www.electronjs.org/), so few things are not in place yet.
 
 DONT WORRY!! I am working on it and soon these will be rectified (if electron gives any support for it :P)
